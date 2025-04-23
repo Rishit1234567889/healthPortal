@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.20-alpine AS builder
+FROM golang:1.22-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -o hospital-portal ./cmd/server
 
 # Final stage
-FROM alpine:3.17
+FROM alpine:latest
 
 # Install necessary packages
 RUN apk --no-cache add ca-certificates tzdata

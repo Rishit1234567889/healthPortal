@@ -10,6 +10,7 @@ build:
 	@go build -o bin/$(APP_NAME) cmd/server/main.go
 
 # Run the application
+
 run:
 	@echo "Running $(APP_NAME)..."
 	@go run cmd/server/main.go
