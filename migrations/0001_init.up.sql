@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Create patients table
+
 CREATE TABLE IF NOT EXISTS patients (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -34,6 +35,7 @@ CREATE INDEX idx_patients_name ON patients(name);
 CREATE INDEX idx_patients_phone ON patients(phone_number);
 
 -- Insert initial admin users
+
 INSERT INTO users (name, email, password, role)
 VALUES 
     ('Admin Doctor', 'doctor@example.com', '$2a$10$NqRvFBJbhYY5XKHMfA9XJu2dTd5QPjJhPfUo5zuYmOW.mSZ9ThAGu', 'doctor'),  -- password: password123
