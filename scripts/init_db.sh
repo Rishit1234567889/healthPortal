@@ -2,6 +2,7 @@
 
 # This script initializes the database with the initial schema
 
+
 # Set environment variables from DATABASE_URL
 if [ -n "$DATABASE_URL" ]; then
     # Extract parts from DATABASE_URL
