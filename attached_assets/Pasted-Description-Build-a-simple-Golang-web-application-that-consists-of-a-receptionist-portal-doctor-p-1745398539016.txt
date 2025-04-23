@@ -1,0 +1,68 @@
+Description:
+Build a simple Golang web application that consists of a receptionist portal & doctor portal which performs the following tasks,
+A single login page for both portals. (Single API if you’re only implementing the backend)
+Receptionists can register a new patient & perform CRUD operations.
+Doctors can view registered patient-related details and should be able to update the data.
+Feel free to add/modify any functionalities on top of the above-mentioned requirements for added advantages.
+
+Technology Stack:
+Golang (Open to use Gin, Chi, etc.)
+PostgreSQL (Open to use ORM or simple SQL with migration)
+
+Expectation:
+A proper Auth implementation
+Backend API-based implementation
+Writing unit test
+A simple documentation of your APIs (Swagger/Postman)
+Creativity beyond the requirements
+Proper directory structure
+
+Validation considerations:
+We validate your assessment based on the following criteria
+Golang standard practices
+File and folder structure (Organizing the code)
+Implementing proven concepts or patterns such as repository design pattern, etc.
+Creativity (Implementation outside of the requirement but useful to have from the functionality perspective)
+
+techsatck:-
+
+Layer | Component / Library | Why?
+Web Framework | Gin (github.com/gin-gonic/gin) | Fast, battle‑tested, easy routing & middleware.
+Database | PostgreSQL | ACID, mature, great Go support.
+ORM / Migrations | GORM (gorm.io/gorm) + golang‑migrate | Developer ergonomics + reliable schema versioning.
+Auth | JWT (github.com/golang-jwt/jwt) | Stateless tokens, wide adoption.
+Config | Viper (github.com/spf13/viper) | Flexible env/file/flag loading.
+Logging | Zap (go.uber.org/zap) | Structured, high performance.
+Validation | Validator.v10 (github.com/go-playground/validator/v10) | Field‐tag validations.
+Testing | testify (github.com/stretchr/testify) | Rich assertions & mocks.
+Containerization | Docker + docker-compose | Easy local dev & consistent CI.
+
+file and folder structure:-
+
+hospital-portal/
+├── cmd/
+│   └── server/
+│       └── main.go             # entrypoint: wire up config → router → run
+├── configs/
+│   └── config.yaml             # default config (env overrides via Viper)
+├── internal/                   # non‑exported application code
+│   ├── auth/                   # JWT generation, parsing, middleware
+│   ├── controllers/            # HTTP handlers
+│   ├── middlewares/            # auth, logging, CORS, recovery
+│   ├── models/                 # GORM models
+│   ├── repositories/           # DB CRUD interfaces
+│   ├── routes/                 # route definitions & grouping
+│   ├── services/               # business logic, orchestrating repos/models
+│   └── utils/                  # helpers (pagination, errors, env)
+├── migrations/                 # SQL schema versions (up/down)
+│   ├── 0001_init.up.sql
+│   └── 0001_init.down.sql
+├── scripts/                    # helper scripts (migrate.sh, seed.sh)
+├── Makefile                    # common tasks (build, test, migrate)
+├── .env                        # local overrides (never commit)
+├── go.mod / go.sum
+└── docker-compose.yml & Dockerfile
+
+also provide postman file to check all endpoints
+
+create this project with required teckstack and file structure
