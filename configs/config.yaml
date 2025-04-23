@@ -1,0 +1,14 @@
+server:
+  port: 8000
+  mode: release  # debug, release, test
+
+database:
+  host: ${PGHOST}
+  port: ${PGPORT}
+  user: ${PGUSER}
+  password: ${PGPASSWORD}
+  dbname: ${PGDATABASE}
+
+auth:
+  jwt_secret: hospital_portal_secure_jwt_secret_key
+  token_expiry: 24h  # 24 hours

@@ -1,0 +1,232 @@
+{
+  "info": {
+    "_postman_id": "12345678-1234-1234-1234-123456789012",
+    "name": "Hospital Portal API",
+    "description": "API collection for the Hospital Portal application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"doctor@example.com\",\n    \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "login"]
+            },
+            "description": "Login to the system"
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"New Doctor\",\n    \"email\": \"newdoctor@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"doctor\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "register"]
+            },
+            "description": "Register a new user"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Patients",
+      "item": [
+        {
+          "name": "Get All Patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/patients",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "patients"]
+            },
+            "description": "Get all patients"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Patient by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/patients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "patients", "1"]
+            },
+            "description": "Get a patient by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Patient (Receptionist)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{receptionistToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"New Patient\",\n    \"age\": 35,\n    \"gender\": \"female\",\n    \"address\": \"123 Main St, Anytown\",\n    \"phone_number\": \"555-123-4567\",\n    \"medical_history\": \"Hypertension\",\n    \"diagnosis\": \"Migraine\",\n    \"treatment\": \"Pain medication, rest\",\n    \"notes\": \"Follow up in 2 weeks\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/patients",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "patients"]
+            },
+            "description": "Create a new patient (receptionist only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Patient (Doctor)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{doctorToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Patient\",\n    \"age\": 35,\n    \"gender\": \"female\",\n    \"address\": \"123 Main St, Anytown\",\n    \"phone_number\": \"555-123-4567\",\n    \"medical_history\": \"Hypertension, Diabetes\",\n    \"diagnosis\": \"Migraine, Dehydration\",\n    \"treatment\": \"Pain medication, rest, fluids\",\n    \"notes\": \"Condition improving\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/patients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "patients", "1"]
+            },
+            "description": "Update a patient (doctor only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Patient (Receptionist)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{receptionistToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/patients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "patients", "1"]
+            },
+            "description": "Delete a patient (receptionist only)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the API is running"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "doctorToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "receptionistToken",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
