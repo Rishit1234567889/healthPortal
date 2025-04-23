@@ -10,6 +10,7 @@ import (
 )
 
 // Role type for user roles
+
 type Role string
 
 const (
@@ -85,6 +86,7 @@ func ValidateToken(tokenString string) (*Claims, error) {
 	}
 
 	// Validate token and extract claims
+
 	if claims, ok := token.Claims.(*Claims); ok && token.Valid {
 		return claims, nil
 	}

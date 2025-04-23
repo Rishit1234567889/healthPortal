@@ -7,7 +7,7 @@ database:
   port: ${PGPORT}
   user: ${PGUSER}
   password: ${PGPASSWORD}
-  dbname: ${PGDATABASE}
+  dbname: ${PGDATABASE} # database name
 
 auth:
   jwt_secret: hospital_portal_secure_jwt_secret_key
