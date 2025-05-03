@@ -39,7 +39,7 @@ func initConfig() {
 func initDB() *gorm.DB {
 	var dsn string
 
-	// Check if DATABASE_URL is set (Replit PostgreSQL)
+	// Check if DATABASE_URL is set
 	if os.Getenv("DATABASE_URL") != "" {
 		// Use the DATABASE_URL directly
 		dsn = os.Getenv("DATABASE_URL")

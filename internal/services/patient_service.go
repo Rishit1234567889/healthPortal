@@ -36,6 +36,11 @@ func (s *PatientService) GetPatientByID(id uint) (*models.Patient, error) {
 	return s.patientRepo.FindByID(id)
 }
 
+// GetPatientByName retrieves a patient by ID
+func (s *PatientService) GetPatientByName(name string) (*models.Patient, error) {
+	return s.patientRepo.FindByName(name)
+}
+
 // UpdatePatient updates a patient
 func (s *PatientService) UpdatePatient(patient *models.Patient) (*models.Patient, error) {
 	return s.patientRepo.Update(patient)

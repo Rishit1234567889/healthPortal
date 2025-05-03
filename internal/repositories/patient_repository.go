@@ -2,8 +2,9 @@ package repositories
 
 import (
 	"errors"
-
+	"fmt"
 	"gorm.io/gorm"
+	"strings"
 
 	"hospital-portal/internal/models"
 )
@@ -46,6 +47,27 @@ func (r *PatientRepository) FindByID(id uint) (*models.Patient, error) {
 		}
 		return nil, err
 	}
+	return &patient, nil
+}
+
+// FindByName retrieve a patient by name
+// if needed
+func (r *PatientRepository) FindByName(name string) (*models.Patient, error) {
+	var patient models.Patient
+
+	// Debugging log
+	fmt.Println("Searching for patient in DB:", name)
+
+	// Execute query
+	err := r.db.Where("LOWER(name) = ?", strings.ToLower(name)).First(&patient).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			fmt.Println("Patient not found in DB:", name) // Additional debugging log
+			return nil, errors.New("patient not found")
+		}
+		return nil, err
+	}
+
 	return &patient, nil
 }
 

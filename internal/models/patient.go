@@ -6,7 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// Patient represents a patient in the hospital
 type Patient struct {
 	ID             uint           `json:"id" gorm:"primaryKey"`
 	Name           string         `json:"name" gorm:"not null"`

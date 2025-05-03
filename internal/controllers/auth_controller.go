@@ -34,8 +34,8 @@ type LoginRequest struct {
 
 // LoginResponse represents the login response body
 type LoginResponse struct {
-	Token string       `json:"token"`
-	User  models.User  `json:"user"`
+	Token string      `json:"token"`
+	User  models.User `json:"user"`
 }
 
 // Login handles user login
@@ -74,7 +74,7 @@ func (c *AuthController) Login(ctx *gin.Context) {
 		return
 	}
 
-	// Mask sensitive information
+	// Mask sensitive information for safety pruposes
 	user.Password = ""
 
 	ctx.JSON(http.StatusOK, LoginResponse{
@@ -102,9 +102,9 @@ func (c *AuthController) Register(ctx *gin.Context) {
 
 	// Create a new user
 	user := &models.User{
-		Name:     req.Name,
-		Email:    req.Email,
-		Role:     req.Role,
+		Name:  req.Name,
+		Email: req.Email,
+		Role:  req.Role,
 	}
 
 	// Register the user

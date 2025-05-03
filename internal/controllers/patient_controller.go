@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	"net/http"
-	"strconv"
-
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"net/http"
+	"strconv"
+	"strings"
 
 	"hospital-portal/internal/models"
 	"hospital-portal/internal/services"
@@ -28,15 +29,15 @@ func NewPatientController(patientService *services.PatientService, logger *zap.L
 
 // PatientRequest represents the patient request body
 type PatientRequest struct {
-	Name          string  `json:"name" binding:"required"`
-	Age           int     `json:"age" binding:"required,min=0,max=150"`
-	Gender        string  `json:"gender" binding:"required,oneof=male female other"`
-	Address       string  `json:"address" binding:"required"`
-	PhoneNumber   string  `json:"phone_number" binding:"required"`
-	MedicalHistory string  `json:"medical_history"`
-	Diagnosis     string  `json:"diagnosis"`
-	Treatment     string  `json:"treatment"`
-	Notes         string  `json:"notes"`
+	Name           string `json:"name" binding:"required"`
+	Age            int    `json:"age" binding:"required,min=0,max=150"`
+	Gender         string `json:"gender" binding:"required,oneof=male female other"`
+	Address        string `json:"address" binding:"required"`
+	PhoneNumber    string `json:"phone_number" binding:"required"`
+	MedicalHistory string `json:"medical_history"`
+	Diagnosis      string `json:"diagnosis"`
+	Treatment      string `json:"treatment"`
+	Notes          string `json:"notes"`
 }
 
 // CreatePatient handles creating a new patient
@@ -107,6 +108,26 @@ func (c *PatientController) GetPatientByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"patient": patient,
 	})
+}
+
+// GetPatientByName handles retrieving a patient by name
+func (c *PatientController) GetPatientByName(ctx *gin.Context) {
+	name := strings.TrimSpace(ctx.Param("name"))
+	fmt.Println("Searching for:", name)
+
+	if name == "" {
+		utils.ErrorResponse(ctx, http.StatusBadRequest, "Name parameter is required", nil)
+		return
+	}
+
+	patient, err := c.patientService.GetPatientByName(name)
+	if err != nil {
+		c.logger.Error("Failed to fetch patient", zap.Error(err), zap.String("name", name))
+		utils.ErrorResponse(ctx, http.StatusNotFound, "Patient not found", err)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"patient": patient})
 }
 
 // UpdatePatient handles updating an existing patient
