@@ -10,12 +10,13 @@ import (
 )
 
 // Role type for user roles
-
 type Role string
 
 const (
 	RoleDoctor       Role = "doctor"
 	RoleReceptionist Role = "receptionist"
+	RolePatient      Role = "patient"
+	RoleAdmin        Role = "admin"
 )
 
 // Claims represents the JWT claims
@@ -86,7 +87,6 @@ func ValidateToken(tokenString string) (*Claims, error) {
 	}
 
 	// Validate token and extract claims
-
 	if claims, ok := token.Claims.(*Claims); ok && token.Valid {
 		return claims, nil
 	}

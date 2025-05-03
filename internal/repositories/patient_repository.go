@@ -65,6 +65,7 @@ func (r *PatientRepository) FindByName(name string) (*models.Patient, error) {
 			fmt.Println("Patient not found in DB:", name) // Additional debugging log
 			return nil, errors.New("patient not found")
 		}
+
 		return nil, err
 	}
 

@@ -10,50 +10,208 @@
       "name": "Authentication",
       "item": [
         {
-          "name": "Login",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"doctor@example.com\",\n    \"password\": \"password123\"\n}"
+          "name": "General Auth",
+          "item": [
+            {
+              "name": "Login (General)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"doctor@example.com\",\n    \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "login"]
+                },
+                "description": "Login to the system (general endpoint)"
+              },
+              "response": []
             },
-            "url": {
-              "raw": "{{baseUrl}}/api/login",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "login"]
-            },
-            "description": "Login to the system"
-          },
-          "response": []
+            {
+              "name": "Register (General)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"New Doctor\",\n    \"email\": \"newdoctor@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"doctor\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "register"]
+                },
+                "description": "Register a new user (general endpoint)"
+              },
+              "response": []
+            }
+          ]
         },
         {
-          "name": "Register",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"New Doctor\",\n    \"email\": \"newdoctor@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"doctor\"\n}"
+          "name": "Doctor Auth",
+          "item": [
+            {
+              "name": "Login (Doctor)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"doctor@example.com\",\n    \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/doctor/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "doctor", "login"]
+                },
+                "description": "Login as a doctor"
+              },
+              "response": []
             },
-            "url": {
-              "raw": "{{baseUrl}}/api/register",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "register"]
+            {
+              "name": "Register (Doctor)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"New Doctor\",\n    \"email\": \"newdoctor@example.com\",\n    \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/doctor/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "doctor", "register"]
+                },
+                "description": "Register a new doctor (role is automatically set to 'doctor')"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Receptionist Auth",
+          "item": [
+            {
+              "name": "Login (Receptionist)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"receptionist@example.com\",\n    \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/receptionist/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "receptionist", "login"]
+                },
+                "description": "Login as a receptionist"
+              },
+              "response": []
             },
-            "description": "Register a new user"
-          },
-          "response": []
+            {
+              "name": "Register (Receptionist)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"New Receptionist\",\n    \"email\": \"newreceptionist@example.com\",\n    \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/receptionist/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "receptionist", "register"]
+                },
+                "description": "Register a new receptionist (role is automatically set to 'receptionist')"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Patient Auth",
+          "item": [
+            {
+              "name": "Login (Patient)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"patient@example.com\",\n    \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/patient/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "patient", "login"]
+                },
+                "description": "Login as a patient"
+              },
+              "response": []
+            },
+            {
+              "name": "Register (Patient)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"New Patient\",\n    \"email\": \"newpatient@example.com\",\n    \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/patient/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "auth", "patient", "register"]
+                },
+                "description": "Register a new patient (role is automatically set to 'patient')"
+              },
+              "response": []
+            }
+          ]
         }
       ]
     },
@@ -75,7 +233,7 @@
               "host": ["{{baseUrl}}"],
               "path": ["api", "v1", "patients"]
             },
-            "description": "Get all patientss"
+            "description": "Get all patients"
           },
           "response": []
         },
@@ -185,6 +343,37 @@
         "description": "Check if the API is running"
       },
       "response": []
+    },
+    {
+      "name": "UI Routes",
+      "item": [
+        {
+          "name": "Welcome Page",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            },
+            "description": "Access the welcome page with API information"
+          },
+          "response": []
+        },
+        {
+          "name": "Admin Dashboard",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/admin",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin"]
+            },
+            "description": "Access the admin dashboard UI"
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "event": [
@@ -225,6 +414,11 @@
     },
     {
       "key": "receptionistToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "patientToken",
       "value": "",
       "type": "string"
     }

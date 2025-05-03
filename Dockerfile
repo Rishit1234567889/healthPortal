@@ -30,6 +30,12 @@ COPY --from=builder /app/hospital-portal .
 COPY --from=builder /app/configs ./configs
 COPY --from=builder /app/migrations ./migrations
 
+
+# Copy frontend static files
+COPY --from=builder /app/public ./public
+
+
+
 # Expose the application port
 EXPOSE 8000
 
